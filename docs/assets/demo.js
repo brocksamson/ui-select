@@ -14,7 +14,6 @@ app.filter('propsFilter', function() {
 
     if (angular.isArray(items)) {
       var keys = Object.keys(props);
-        
       items.forEach(function(item) {
         var itemMatches = false;
 
@@ -143,6 +142,24 @@ app.controller('DemoCtrl', function ($scope, $http, $timeout, $interval) {
     '8' : { name: 'Natasha',   email: 'natasha@email.com',   age: 54, country: 'Ecuador' },
     '9' : { name: 'Michael',   email: 'michael@email.com',   age: 15, country: 'Colombia' },
     '10' : { name: 'Nicolás',   email: 'nicolas@email.com',    age: 43, country: 'Colombia' }
+  };
+
+  vm.convertToPerson = function (newPersonName) {
+    var person = {
+        name: newPersonName
+    };
+
+    return person;
+  };
+
+  vm.onSelect = function($item, $model){
+    if(!$item.isTag){
+        return false;
+    }
+    var item = angular.copy($item);
+    delete item.isTag;
+
+    vm.people.push(item);
   };
 
   vm.person = {};
